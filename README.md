@@ -4,9 +4,12 @@
 
 仓库地址：<https://github.com/TaylorSwitiger/weekly-todo-desktop>
 
-## 下载（Windows）
+## 下载
 
-无需开发环境时，请到 **[Releases 发布页](https://github.com/TaylorSwitiger/weekly-todo-desktop/releases)** 下载最新版附件中的 `.exe`（含便携版与安装包，以该版本下列表为准）。
+请到 **[Releases 发布页](https://github.com/TaylorSwitiger/weekly-todo-desktop/releases)** 获取对应系统的安装包：
+
+- **Windows**：`.exe`（便携版与 Setup 安装包）
+- **macOS**：`.dmg` / `.zip`，含 **Intel（x64）** 与 **Apple Silicon（arm64）** 两种架构，请按自己的 Mac 选择；首次打开若提示未识别开发者，可在「系统设置 → 隐私与安全性」中允许，或右键打开。
 
 ## 功能概要
 
@@ -16,8 +19,8 @@
 
 ## 环境要求
 
-- Windows x64（当前打包目标；源码可在 macOS/Linux 上开发，需自行调整 `electron-builder` 配置）。
-- [Node.js](https://nodejs.org/) 建议 **LTS**（如 20.x / 22.x）。
+- 运行：当前提供 **Windows x64** 与 **macOS（Intel / Apple Silicon）** 的预编译包；开发调试可跨平台。
+- 开发：安装 [Node.js](https://nodejs.org/) **LTS**（如 20.x / 22.x）。
 
 ## 开发与运行
 
@@ -31,20 +34,26 @@ npm start
 ## 打包
 
 ```bash
+# Windows（需在 Windows 上执行，或在 CI 中）
 npm run build
+# 或显式：npm run build:win
+
+# macOS（需在 macOS 上执行，或在 CI 中）
+npm run build:mac
 ```
 
-产物默认在 `dist/`（便携版 exe、NSIS 安装包等，具体见构建日志）。**未做代码签名**时，Windows 可能出现 SmartScreen 提示，属正常现象。
+产物在 `dist/`：Windows 为便携版与 NSIS 安装包；macOS 为各架构的 `.dmg` 与 `.zip`。**未做 Apple / 微软代码签名**时，系统可能出现安全提示，属正常现象。
 
-推送与 `package.json` 里 `version` 一致的 **`v` 前缀标签**（例如版本 `1.0.1` → 标签 `v1.0.1`）后，**GitHub Actions** 会自动在 Windows 上执行上述构建，并把 `dist/` 中的 `.exe` 上传到对应 Release，无需手动上传附件。
+推送与 `package.json` 里 `version` 一致的 **`v` 前缀标签**（例如 `1.0.1` → `v1.0.1`）后，**GitHub Actions** 会在 **Windows** 与 **macOS** 上分别构建，并将各平台产物一并上传到该版本的 **Release**。
 
 若本机打包报错与 **7-Zip / 符号链接 / 客户端没有所需的特权** 相关，本项目已在 `package.json` 中设置 `signAndEditExecutable: false` 以降低对 symlink 权限的依赖；仍失败时可尝试：**以管理员运行终端** 或开启 **Windows 开发人员模式**。
 
 ## 数据存储位置
 
-使用 [electron-store](https://github.com/sindresorhus/electron-store)，数据保存在本机用户目录。Windows 上一般在：
+使用 [electron-store](https://github.com/sindresorhus/electron-store)，数据保存在本机用户目录：
 
-`%APPDATA%\weekly-todo-desktop\`（与 `package.json` 中 `name` 一致，以本机为准）。
+- **Windows**：`%APPDATA%\weekly-todo-desktop\`
+- **macOS**：一般在 `~/Library/Application Support/` 下以应用显示名命名的目录（打包后多为「周待办清单」；开发调试时可能与 `package.json` 的 `name` 一致）
 
 ## 开源协议
 
