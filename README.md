@@ -4,6 +4,10 @@
 
 仓库地址：<https://github.com/TaylorSwitiger/weekly-todo-desktop>
 
+## 下载（Windows）
+
+无需开发环境时，请到 **[Releases 发布页](https://github.com/TaylorSwitiger/weekly-todo-desktop/releases)** 下载最新版附件中的 `.exe`（含便携版与安装包，以该版本下列表为准）。
+
 ## 功能概要
 
 - 按创建日所在周分组展示；**本周**展示全部；**历史周**同时展示未完成与已完成（已完成排在后面，可取消勾选）。
@@ -31,6 +35,8 @@ npm run build
 ```
 
 产物默认在 `dist/`（便携版 exe、NSIS 安装包等，具体见构建日志）。**未做代码签名**时，Windows 可能出现 SmartScreen 提示，属正常现象。
+
+推送与 `package.json` 里 `version` 一致的 **`v` 前缀标签**（例如版本 `1.0.1` → 标签 `v1.0.1`）后，**GitHub Actions** 会自动在 Windows 上执行上述构建，并把 `dist/` 中的 `.exe` 上传到对应 Release，无需手动上传附件。
 
 若本机打包报错与 **7-Zip / 符号链接 / 客户端没有所需的特权** 相关，本项目已在 `package.json` 中设置 `signAndEditExecutable: false` 以降低对 symlink 权限的依赖；仍失败时可尝试：**以管理员运行终端** 或开启 **Windows 开发人员模式**。
 
