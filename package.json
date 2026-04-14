@@ -1,0 +1,74 @@
+{
+  "name": "weekly-todo-desktop",
+  "version": "1.0.0",
+  "description": "按周管理的桌面待办清单，支持周报导出与星标优先级",
+  "main": "main.js",
+  "scripts": {
+    "start": "electron .",
+    "build": "electron-builder --win --x64"
+  },
+  "keywords": [
+    "electron",
+    "todo",
+    "weekly",
+    "desktop",
+    "待办"
+  ],
+  "author": "TaylorSwitiger (https://github.com/TaylorSwitiger)",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/TaylorSwitiger/weekly-todo-desktop.git"
+  },
+  "bugs": {
+    "url": "https://github.com/TaylorSwitiger/weekly-todo-desktop/issues"
+  },
+  "homepage": "https://github.com/TaylorSwitiger/weekly-todo-desktop#readme",
+  "type": "commonjs",
+  "build": {
+    "electronDist": "node_modules/electron/dist",
+    "electronDownload": {
+      "cache": "node_modules/electron/dist"
+    },
+    "appId": "com.github.taylorswitiger.weekly-todo-desktop",
+    "productName": "周待办清单",
+    "directories": {
+      "output": "dist"
+    },
+    "files": [
+      "main.js",
+      "index.html",
+      "styles.css",
+      "renderer.js",
+      "package.json",
+      "node_modules/**/*"
+    ],
+    "win": {
+      "signAndEditExecutable": false,
+      "target": [
+        {
+          "target": "portable",
+          "arch": ["x64"]
+        },
+        {
+          "target": "nsis",
+          "arch": ["x64"]
+        }
+      ],
+      "icon": null
+    },
+    "nsis": {
+      "oneClick": false,
+      "allowToChangeInstallationDirectory": true,
+      "createDesktopShortcut": true,
+      "createStartMenuShortcut": true
+    }
+  },
+  "dependencies": {
+    "electron-store": "^11.0.2"
+  },
+  "devDependencies": {
+    "electron": "^41.2.0",
+    "electron-builder": "^26.8.1"
+  }
+}

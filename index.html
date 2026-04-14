@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>周待办清单</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="notebook">
+        <div class="header">
+            <h1 class="title">待办清单</h1>
+            <div class="header-actions">
+                <button type="button" class="report-btn" id="copyReportBtn" title="复制本周已完成事项为周报">复制周报</button>
+                <button type="button" class="add-btn" id="addBtn" title="添加待办" aria-expanded="false" aria-label="添加待办">
+                    <span class="add-btn-icon add-btn-icon--plus" aria-hidden="true">+</span>
+                    <span class="add-btn-icon add-btn-icon--collapse" aria-hidden="true">
+                        <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M18 15l-6-6-6 6"/></svg>
+                    </span>
+                </button>
+            </div>
+        </div>
+        
+        <div class="input-section" id="inputSection">
+            <div class="input-wrapper">
+                <input type="text" id="todoInput" placeholder="输入待办事项，按回车确认..." />
+                <button class="submit-btn" id="submitBtn">添加</button>
+            </div>
+        </div>
+
+        <div id="weeksContainer"></div>
+
+        <div class="stats-container">
+            <div class="stats-header">
+                <span class="stats-title">本周统计</span>
+                <div class="stats-section" id="currentWeekStats">
+                    <div class="stat-item">
+                        <div class="stat-number" id="currentTotal">0</div>
+                        <div class="stat-label">总任务</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="currentCompleted">0</div>
+                        <div class="stat-label">已完成</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number" id="currentPending">0</div>
+                        <div class="stat-label">待完成</div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="stats-header">
+                <button class="toggle-btn" id="historyToggle" title="显示/隐藏历史统计">
+                    ⟲
+                </button>
+                <span class="stats-title">历史统计</span>
+            </div>
+            <div class="stats-section hidden" id="historyStats">
+                <div class="stat-item">
+                    <div class="stat-number" id="historyTotal">0</div>
+                    <div class="stat-label">未完成</div>
+                </div>
+            </div>
+        </div>
+
+        <div class="note">
+            <strong>说明：</strong>待办按创建时的周分组。历史周会同时显示未完成与已完成的任务（已完成排在后面），便于核对或取消完成。周报按「当前自然周内勾选完成」的时间统计，与任务创建周无关。高优先级可点星标。
+        </div>
+    </div>
+
+    <script src="renderer.js"></script>
+</body>
+</html>
